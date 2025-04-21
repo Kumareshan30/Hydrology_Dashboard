@@ -1,0 +1,11 @@
+fastapi
+hypercorn
+pandas
+numpy
+plotly
+pymannkendall
+statsmodels
+scikit-learn
+xgboost
+torch
+pmdarima
