@@ -1,9 +1,7 @@
 // pages/index.tsx
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { Button } from "@/components/ui/button"
-import { Card, StatCard } from "@/components/ui/card"
-import { Carousel } from "@/components/ui/carousel"
+import { StatCard } from "@/components/ui/card"
 
 interface StationInfo {
   station_id: string

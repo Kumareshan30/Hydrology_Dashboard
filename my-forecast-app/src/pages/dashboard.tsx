@@ -1,29 +1,23 @@
 // pages/dashboard.tsx
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import type { ComponentType } from "react";
 import type { Tab } from "@/components/TabNavigation";
 import StationSelect from "@/components/StationSelect";
 import SidebarNav from "@/components/SidebarNav";
-import PlotCard from "@/components/PlotCard";
-import MannKendallResult from "@/components/MannKendallResult"; "@/components/MannKendallResult";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Slider } from "@/components/ui/slider";
 import { MannKendallResultData } from "@/components/MannKendallResult";
 import StreamflowSection from "@/components/sections/Streamflow";
 import CatchmentSection from "@/components/sections/Catchment";
 import HydrometeorologySection from "@/components/sections/Hydrometeorology";
 import GeologySoilsSection from "@/components/sections/GeologySoils";
-
-const Plot: ComponentType<any> = dynamic(() => import("react-plotly.js"), {
-  ssr: false,
-});
+import type { Data, Layout, Config  } from "plotly.js";
 
 interface PlotData {
-  data: any[];
-  layout: any;
+  data: Data[];
+  layout: Partial<Layout>;
+  config?: Partial<Config>;
 }
+
 
 // Debounce hook
 function useDebounce<T>(value: T, delay: number): T {

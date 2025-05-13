@@ -1,11 +1,12 @@
 // components/sections/Catchment.tsx
 import dynamic from "next/dynamic";
 import PlotCard from "@/components/PlotCard";
+import type { Data, Layout } from "plotly.js";
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
 interface Props {
   activeTab: string;
-  plotData: { data: any[]; layout: any } | null;
+  plotData: { data: Data[]; layout: Partial<Layout> } | null;
 }
 
 export default function CatchmentSection({ activeTab, plotData }: Props) {

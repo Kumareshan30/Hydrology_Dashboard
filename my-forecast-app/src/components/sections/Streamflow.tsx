@@ -1,18 +1,26 @@
 // components/sections/Streamflow.tsx
-import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import PlotCard from "@/components/PlotCard";
 import MannKendallResult from "@/components/MannKendallResult";
-import { Slider } from "@/components/ui/slider";
+import type { Data, Layout } from "plotly.js";
+import type { PlotParams } from "react-plotly.js";
 
-const Plot: ComponentType<any> = dynamic(() => import("react-plotly.js"), { ssr: false });
+const Plot: ComponentType<PlotParams> = dynamic(() => import("react-plotly.js"), { ssr: false });
+
+interface MannKendallData {
+  trend: string
+  p_value: number
+  test_statistic: number
+  z: number
+  interpretation?: string
+}
 
 interface Props {
     activeTab: string;
     selectedStation: string;
-    plotData: { data: any[]; layout: any } | null;
-    mannKendallData: any | null;
+    plotData: { data: Data[]; layout: Partial<Layout> } | null;    
+    mannKendallData: MannKendallData | null;
     sliderRange: [number, number];
     setSliderRange: (r: [number, number]) => void;
 }
@@ -21,8 +29,6 @@ export default function StreamflowSection({
     activeTab,
     plotData,
     mannKendallData,
-    sliderRange,
-    setSliderRange,
 }: Props) {
     // Monthly Flow, Trend Line, ARIMA Decomp all just show a 700px chart
     if (["Monthly Flow", "Trend Line"].includes(activeTab)) {

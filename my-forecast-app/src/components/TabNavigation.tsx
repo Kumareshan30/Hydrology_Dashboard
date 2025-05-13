@@ -50,8 +50,17 @@ export default function TabNavigation({
   activeTab: Tab;
   setActiveTab: (tab: Tab) => void;
 }) {
+  // wrap the incoming string and cast it to Tab
+  const handleTabChange = (val: string) => {
+    setActiveTab(val as Tab);
+  };
+
   return (
-    <Tabs value={activeTab} className="w-full" onValueChange={(val: Tab) => setActiveTab(val)}>
+    <Tabs
+      value={activeTab}
+      className="w-full"
+      onValueChange={handleTabChange}
+    >
       <TabsList className="flex flex-wrap justify-center gap-2">
         {tabs.map((tab) => (
           <TabsTrigger key={tab} value={tab}>

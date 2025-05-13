@@ -1,14 +1,14 @@
 // components/sections/Hydrometeorology.tsx
-import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import PlotCard from "@/components/PlotCard";
 import { Slider } from "@/components/ui/slider";
+import type { Data, Layout } from "plotly.js";
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
 interface Props {
     activeTab: string;
-    plotData: { data: any[]; layout: any } | null;
+    plotData: { data: Data[]; layout: Partial<Layout> } | null;
     sliderRange: [number, number];
     setSliderRange: (r: [number, number]) => void;
 }
