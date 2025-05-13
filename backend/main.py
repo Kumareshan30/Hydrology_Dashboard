@@ -65,7 +65,7 @@ class SimpleNN(nn.Module):
 
 
 state_values = pd.read_csv(
-    "../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv",
+    "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv",
     usecols=["station_id", "station_name", "state_outlet"])
 
 meta_states = state_values.set_index("station_id")
@@ -85,7 +85,7 @@ async def list_stations():
     try:
         # only read the three columns we care about, cast to str
         df = pd.read_csv(
-            "../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv",
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv",
             usecols=["station_id", "station_name", "state_outlet"],
             dtype=str,
         )
@@ -123,7 +123,7 @@ def load_streamflow_data(station_id: str):
     and resamples to monthly averages.
     """
     try:
-        df = pd.read_csv("../data/03_streamflow/streamflow_MLd.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/streamflow_MLd.csv")
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error reading streamflow CSV: " + str(e))
 
@@ -390,7 +390,7 @@ def load_attributes_data():
     are treated as predictors.
     """
     try:
-        df = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error reading attributes CSV: " + str(e))
     return df
@@ -504,9 +504,9 @@ def load_hydro_data(station_id: str):
     Merges them on 'station_id' and 'date' and drops missing data.
     """
     try:
-        streamflow_df = pd.read_csv("../data/03_streamflow/streamflow_MLd.csv", parse_dates=["date"])
-        precip_df = pd.read_csv("../data/precipitation_agcd.csv", parse_dates=["date"])
-        tmax_df = pd.read_csv("../data/tmax_agcd.csv", parse_dates=["date"])
+        streamflow_df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/streamflow_MLd.csv", parse_dates=["date"])
+        precip_df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/precipitation_AGCD.csv", parse_dates=["date"])
+        tmax_df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/tmax_AGCD.csv", parse_dates=["date"])
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error reading hydrological CSVs: " + str(e))
 
@@ -788,7 +788,7 @@ async def predict_nn():
 # def get_geospatial_plot():
 #     try:
 #         # Load the master attribute table.
-#         df = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+#         df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
 #
 #         # Ensure required columns are present.
 #         required_columns = {"station_id", "lat_outlet", "long_outlet", "state_outlet", "catchment_area"}
@@ -939,7 +939,7 @@ async def predict_nn():
 def get_geospatial_plot():
     try:
         # Load the master attribute table.
-        df = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
 
         # Ensure required columns are present.
         required_columns = {"station_id", "lat_outlet", "long_outlet", "state_outlet", "catchment_area"}
@@ -1062,7 +1062,7 @@ def get_geospatial_plot():
 def get_density_map():
     try:
         # Load the master attribute table.
-        df = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
 
         # Make sure the required columns exist.
         required_columns = {"lat_outlet", "long_outlet", "catchment_area"}
@@ -1101,7 +1101,7 @@ def get_hydrometeorology_timeseries(
     try:
         # 1) Load the wide-format precipitation file
         df_wide = pd.read_csv(
-            "../data/05_hydrometeorology/05_hydrometeorology/01_precipitation_timeseries/precipitation_AGCD.csv"
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/precipitation_AGCD.csv"
         )
         print("here1")
         # The first three columns are 'year', 'month', 'day'.
@@ -1126,7 +1126,7 @@ def get_hydrometeorology_timeseries(
         df_station.rename(columns={station_id: "precipitation"}, inplace=True)
         print("here4")
         # 4) Load the CAMELS master table
-        df_master = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df_master = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
         print("here5")
         # 5) Attempt to fetch the station's metadata
         row = df_master.loc[df_master["station_id"] == station_id]
@@ -1227,11 +1227,11 @@ def get_hydrometeorology_indices():
     try:
         # Load the climatic indices file.
         # This file is assumed to contain columns like: station_id, aridity, p_mean, pet_mean, p_seasonality, etc.
-        df_indices = pd.read_csv("../data/05_hydrometeorology/05_hydrometeorology/ClimaticIndices.csv")
+        df_indices = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/ClimaticIndices.csv")
         df_indices.rename(columns={"ID": "station_id"}, inplace=True)
         # Load the CAMELS-AUS master attribute table.
         # It should include columns such as: station_id, station_name, state_outlet, etc.
-        df_master = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df_master = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
         print("here0")
 
         # Merge the two DataFrames on 'station_id' to add station_name and state_outlet to the indices.
@@ -1290,8 +1290,7 @@ def get_hydrometeorology_modeling(
     try:
         # 1) Load raw daily precipitation
         df_wide = pd.read_csv(
-            "../data/05_hydrometeorology/05_hydrometeorology/"
-            "01_precipitation_timeseries/precipitation_AGCD.csv"
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/precipitation_AGCD.csv"
         )
 
         # 2) Build datetime
@@ -1319,7 +1318,7 @@ def get_hydrometeorology_modeling(
             raise HTTPException(404, "No data after applying year‐range filter")
 
         # 6) Lookup metadata
-        df_meta = pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+        df_meta = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
         m = df_meta.loc[df_meta["station_id"] == station_id]
         if m.empty:
             station_name, station_state = station_id, "Unknown"
@@ -1409,8 +1408,7 @@ def get_hydrometeorology_extreme(
     try:
         # 1) Load raw daily precipitation
         df = pd.read_csv(
-            "../data/05_hydrometeorology/05_hydrometeorology/"
-            "01_precipitation_timeseries/precipitation_AGCD.csv"
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/precipitation_AGCD.csv."
         )
 
         # 2) Must have year/month/day + station columns
@@ -1434,7 +1432,7 @@ def get_hydrometeorology_extreme(
 
         # 5) Lookup station metadata
         meta = (
-            pd.read_csv("../data/CAMELS_AUS_Attributes&Indices_MasterTable.csv")
+            pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CAMELS_AUS_Attributes.Indices_MasterTable.csv")
             .query("station_id == @station_id")
         )
         if meta.empty:
@@ -1533,7 +1531,7 @@ def get_hydrometeorology_extreme(
 @app.get("/soil/ksat_boxplot")
 async def soil_ksat_boxplot():
     try:
-        df = pd.read_csv("../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv")
         # ensure station_id is present
         if not {"station_id", "geol_prim", "ksat"}.issubset(df.columns):
             raise HTTPException(400, "Missing 'station_id', 'geol_prim' or 'ksat'")
@@ -1562,7 +1560,7 @@ async def soil_ksat_boxplot():
 @app.get("/soil/clay_sand_scatter")
 async def soil_clay_sand_scatter():
     try:
-        df = pd.read_csv("../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv")
         if not {"station_id", "claya", "sanda", "geol_prim"}.issubset(df.columns):
             raise HTTPException(400, "Missing required columns")
         df = df[["station_id", "claya", "sanda", "geol_prim"]].dropna()
@@ -1596,7 +1594,7 @@ async def soil_clay_sand_scatter():
 @app.get("/soil/prop_stacked_bar")
 async def soil_prop_stacked_bar():
     try:
-        df = pd.read_csv("../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv")
         prop_cols = ["unconsoldted", "igneous", "silicsed", "carbnatesed",
                      "othersed", "metamorph", "sedvolc", "oldrock"]
         all_cols = ["geol_prim"] + prop_cols
@@ -1625,7 +1623,7 @@ async def soil_prop_stacked_bar():
 @app.get("/soil/pca_biplot")
 async def soil_pca_biplot():
     try:
-        df = pd.read_csv("../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv")
+        df = pd.read_csv("https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv")
         prop_cols = ["unconsoldted", "igneous", "silicsed", "carbnatesed",
                      "othersed", "metamorph", "sedvolc", "oldrock"]
         if not set(prop_cols + ["station_id", "geol_prim"]).issubset(df.columns):
@@ -1662,7 +1660,7 @@ async def soil_kmeans(k: int = Query(10, ge=2, le=10)):
     try:
         # 1) Load the exact 12 geology/soil columns
         df = pd.read_csv(
-            "../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv"
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv"
         )
         features = [
             "unconsoldted",
@@ -1747,7 +1745,7 @@ async def soil_hierarchical_heatmap(
     try:
         # load raw geology & soils table
         df = pd.read_csv(
-            "../data/04_attributes/04_attributes/CatchmentAttributes_01_Geology&Soils.csv"
+            "https://github.com/Kumareshan30/Hydrology_Dashboard/releases/download/v1.0-data/CatchmentAttributes_01_Geology.Soils.csv"
         )
 
         features = [
