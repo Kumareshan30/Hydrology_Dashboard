@@ -27,7 +27,7 @@ export default function StationSelect({
 
   useEffect(() => {
     setLoading(true)
-    fetch("http://localhost:8000/stations")
+    fetch("https://hydrology-dashboard.onrender.com/stations")
       .then((res) => {
         if (!res.ok) throw new Error(res.statusText)
         return res.json()

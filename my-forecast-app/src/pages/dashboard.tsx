@@ -36,31 +36,31 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 const endpointMapping: Record<Tab, (s: string) => string> = {
-  "Monthly Flow": (s) => `http://localhost:8000/monthly_flow_plot?station_id=${s}`,
-  "Trend Line": (s) => `http://localhost:8000/trend_line_plot?station_id=${s}`,
+  "Monthly Flow": (s) => `https://hydrology-dashboard.onrender.com/monthly_flow_plot?station_id=${s}`,
+  "Trend Line": (s) => `https://hydrology-dashboard.onrender.com/trend_line_plot?station_id=${s}`,
   "ARIMA Decomposition": (s) =>
-    `http://localhost:8000/arima_decomposition_plot?station_id=${s}`,
+    `https://hydrology-dashboard.onrender.com/arima_decomposition_plot?station_id=${s}`,
   "ARIMA Forecast": (s) =>
-    `http://localhost:8000/arima_forecast_plot?station_id=${s}&steps=12`,
-  "Feature Importance RF": () => `http://localhost:8000/feature_importance_rf`,
-  "Feature Importance XGB": () => `http://localhost:8000/feature_importance_xgb`,
+    `https://hydrology-dashboard.onrender.com/arima_forecast_plot?station_id=${s}&steps=12`,
+  "Feature Importance RF": () => `https://hydrology-dashboard.onrender.com/feature_importance_rf`,
+  "Feature Importance XGB": () => `https://hydrology-dashboard.onrender.com/feature_importance_xgb`,
   "Anomaly Detection": (s) =>
-    `http://localhost:8000/anomaly_detection?station_id=${s}`,
-  "Geospatial Analysis": () => `http://localhost:8000/geospatial_plot`,
-  "Density Map": () => `http://localhost:8000/density_map`,
+    `https://hydrology-dashboard.onrender.com/anomaly_detection?station_id=${s}`,
+  "Geospatial Analysis": () => `https://hydrology-dashboard.onrender.com/geospatial_plot`,
+  "Density Map": () => `https://hydrology-dashboard.onrender.com/density_map`,
   "Time Series": (s) =>
-    `http://localhost:8000/hydrometeorology_timeseries?station_id=${s}`,
-  "Climatic Indices": () => `http://localhost:8000/hydrometeorology_indices`,
+    `https://hydrology-dashboard.onrender.com/hydrometeorology_timeseries?station_id=${s}`,
+  "Climatic Indices": () => `https://hydrology-dashboard.onrender.com/hydrometeorology_indices`,
   "Modeling & Forecasting": (s) =>
-    `http://localhost:8000/hydrometeorology_modeling?station_id=${s}`,
+    `https://hydrology-dashboard.onrender.com/hydrometeorology_modeling?station_id=${s}`,
   "Extreme Value Analysis": (s) =>
-    `http://localhost:8000/hydrometeorology_extreme?station_id=${s}`,
-  "Ksat Boxplot": () => `http://localhost:8000/soil/ksat_boxplot`,
-  "Clay vs Sand Scatter": () => `http://localhost:8000/soil/clay_sand_scatter`,
-  "Proportions Stacked Bar": () => `http://localhost:8000/soil/prop_stacked_bar`,
-  "PCA Biplot": () => `http://localhost:8000/soil/pca_biplot`,
-  "K‑Means Clusters": () => `http://localhost:8000/soil/kmeans`,
-  "Hierarchical Heatmap": () => `http://localhost:8000/soil/hierarchical`,
+    `https://hydrology-dashboard.onrender.com/hydrometeorology_extreme?station_id=${s}`,
+  "Ksat Boxplot": () => `https://hydrology-dashboard.onrender.com/soil/ksat_boxplot`,
+  "Clay vs Sand Scatter": () => `https://hydrology-dashboard.onrender.com/soil/clay_sand_scatter`,
+  "Proportions Stacked Bar": () => `https://hydrology-dashboard.onrender.com/soil/prop_stacked_bar`,
+  "PCA Biplot": () => `https://hydrology-dashboard.onrender.com/soil/pca_biplot`,
+  "K‑Means Clusters": () => `https://hydrology-dashboard.onrender.com/soil/kmeans`,
+  "Hierarchical Heatmap": () => `https://hydrology-dashboard.onrender.com/soil/hierarchical`,
 };
 
 const hideStationDropdownTabs: Tab[] = [
@@ -99,7 +99,7 @@ export default function DashboardPage() {
   // Fetch available states for the hierarchical heatmap
   useEffect(() => {
     if (activeTab === "Hierarchical Heatmap") {
-      fetch("http://localhost:8000/soil/hierarchical/states")
+      fetch("https://hydrology-dashboard.onrender.com/soil/hierarchical/states")
         .then((r) => r.json())
         .then(setStateList)
         .catch(console.error);
