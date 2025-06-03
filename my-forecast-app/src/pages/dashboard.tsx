@@ -30,31 +30,31 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 const endpointMapping: Record<Tab, (s: string) => string> = {
-  "Monthly Flow": (s) => `https://hydrology-dashboard.onrender.com/monthly_flow_plot?station_id=${s}`,
-  "Trend Line": (s) => `https://hydrology-dashboard.onrender.com/trend_line_plot?station_id=${s}`,
+  "Monthly Flow": (s) => `https://hydrologydashboard-production.up.railway.app/monthly_flow_plot?station_id=${s}`,
+  "Trend Line": (s) => `https://hydrologydashboard-production.up.railway.app/trend_line_plot?station_id=${s}`,
   "ARIMA Decomposition": (s) =>
-    `https://hydrology-dashboard.onrender.com/arima_decomposition_plot?station_id=${s}`,
+    `https://hydrologydashboard-production.up.railway.app/arima_decomposition_plot?station_id=${s}`,
   "ARIMA Forecast": (s) =>
-    `https://hydrology-dashboard.onrender.com/arima_forecast_plot?station_id=${s}&steps=12`,
-  "Feature Importance RF": () => `https://hydrology-dashboard.onrender.com/feature_importance_rf`,
-  "Feature Importance XGB": () => `https://hydrology-dashboard.onrender.com/feature_importance_xgb`,
+    `https://hydrologydashboard-production.up.railway.app/arima_forecast_plot?station_id=${s}&steps=12`,
+  "Feature Importance RF": () => `https://hydrologydashboard-production.up.railway.app/feature_importance_rf`,
+  "Feature Importance XGB": () => `https://hydrologydashboard-production.up.railway.app/feature_importance_xgb`,
   "Anomaly Detection": (s) =>
-    `https://hydrology-dashboard.onrender.com/anomaly_detection?station_id=${s}`,
-  "Geospatial Analysis": () => `https://hydrology-dashboard.onrender.com/geospatial_plot`,
-  "Density Map": () => `https://hydrology-dashboard.onrender.com/density_map`,
+    `https://hydrologydashboard-production.up.railway.app/anomaly_detection?station_id=${s}`,
+  "Geospatial Analysis": () => `https://hydrologydashboard-production.up.railway.app/geospatial_plot`,
+  "Density Map": () => `https://hydrologydashboard-production.up.railway.app/density_map`,
   "Time Series": (s) =>
-    `https://hydrology-dashboard.onrender.com/hydrometeorology_timeseries?station_id=${s}`,
-  "Climatic Indices": () => `https://hydrology-dashboard.onrender.com/hydrometeorology_indices`,
+    `https://hydrologydashboard-production.up.railway.app/hydrometeorology_timeseries?station_id=${s}`,
+  "Climatic Indices": () => `https://hydrologydashboard-production.up.railway.app/hydrometeorology_indices`,
   "Modeling & Forecasting": (s) =>
-    `https://hydrology-dashboard.onrender.com/hydrometeorology_modeling?station_id=${s}`,
+    `https://hydrologydashboard-production.up.railway.app/hydrometeorology_modeling?station_id=${s}`,
   "Extreme Value Analysis": (s) =>
-    `https://hydrology-dashboard.onrender.com/hydrometeorology_extreme?station_id=${s}`,
-  "Ksat Boxplot": () => `https://hydrology-dashboard.onrender.com/soil/ksat_boxplot`,
-  "Clay vs Sand Scatter": () => `https://hydrology-dashboard.onrender.com/soil/clay_sand_scatter`,
-  "Proportions Stacked Bar": () => `https://hydrology-dashboard.onrender.com/soil/prop_stacked_bar`,
-  "PCA Biplot": () => `https://hydrology-dashboard.onrender.com/soil/pca_biplot`,
-  "K‑Means Clusters": () => `https://hydrology-dashboard.onrender.com/soil/kmeans`,
-  "Hierarchical Heatmap": () => `https://hydrology-dashboard.onrender.com/soil/hierarchical`,
+    `https://hydrologydashboard-production.up.railway.app/hydrometeorology_extreme?station_id=${s}`,
+  "Ksat Boxplot": () => `https://hydrologydashboard-production.up.railway.app/soil/ksat_boxplot`,
+  "Clay vs Sand Scatter": () => `https://hydrologydashboard-production.up.railway.app/soil/clay_sand_scatter`,
+  "Proportions Stacked Bar": () => `https://hydrologydashboard-production.up.railway.app/soil/prop_stacked_bar`,
+  "PCA Biplot": () => `https://hydrologydashboard-production.up.railway.app/soil/pca_biplot`,
+  "K‑Means Clusters": () => `https://hydrologydashboard-production.up.railway.app/soil/kmeans`,
+  "Hierarchical Heatmap": () => `https://hydrologydashboard-production.up.railway.app/soil/hierarchical`,
 };
 
 const hideStationDropdownTabs: Tab[] = [
@@ -93,7 +93,7 @@ export default function DashboardPage() {
   // Fetch available states for the hierarchical heatmap
   useEffect(() => {
     if (activeTab === "Hierarchical Heatmap") {
-      fetch("https://hydrology-dashboard.onrender.com/soil/hierarchical/states")
+      fetch("https://hydrologydashboard-production.up.railway.app/soil/hierarchical/states")
         .then((r) => r.json())
         .then(setStateList)
         .catch(console.error);
