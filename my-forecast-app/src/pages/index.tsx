@@ -36,7 +36,7 @@ export default function Home() {
 //   ]
 
   useEffect(() => {
-    fetch("https://hydrology-dashboard.onrender.com/stations")
+    fetch("https://hydrologydashboard-production.up.railway.app/stations")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load stations")
         return res.json()
