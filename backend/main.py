@@ -39,7 +39,7 @@ from scipy.cluster.hierarchy import linkage, leaves_list
 app = FastAPI()
 
 # Allow CORS for your Next.js frontend (assumed to run on http://localhost:3000)
-origins = ["http://localhost:3000","https://hydrology-dashboard.vercel.app/"]
+origins = ["https://hydrology-dashboard.vercel.app"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
